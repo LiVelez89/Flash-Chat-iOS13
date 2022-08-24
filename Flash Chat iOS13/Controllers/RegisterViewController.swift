@@ -20,6 +20,11 @@ class RegisterViewController: UIViewController {
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
+                    let alert = UIAlertController(title: "Password should have at least 6 characters.", message: "", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+                        self.dismiss(animated: true, completion: nil)
+                    }
                     print(e.localizedDescription)//a description of the error in the language the user selected
                 } else {
                     //Navegate to the ChatViewController
